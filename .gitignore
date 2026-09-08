@@ -1,0 +1,10 @@
+.reference/
+.DS_Store
+*.log
+web/node_modules/
+web/dist/
+web/.wrangler/
+web/.vinext/
+web/.env*
+web/.verification/
+.hosting-work/
