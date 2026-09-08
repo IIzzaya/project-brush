@@ -31,6 +31,14 @@ npm run build
 - 导出 2400 × 1968 PNG，不包含工具栏和网格。绘画暂存在当前页面，刷新会重置。
 - 快捷键：`1/2/3` 选笔刷，`B/H` 绘画/平移，空格暂停，`0` 适配画布，`Ctrl/⌘ Z` 撤销，`Ctrl/⌘ Shift Z` 重做。
 
+## 部署
+
+线上地址：**https://iizzaya.github.io/project-brush/**（GitHub Pages，个人网站画廊通过 iframe 同域嵌入）。
+
+管线：push 到 `main` → `.github/workflows/deploy.yml`（npm ci → typecheck → test → `vinext build` → `prerender`）→ 部署 `web/dist/client/project-brush/` 静态产物。仓库 Pages Source 为 **GitHub Actions**。
+
+`next.config.ts` 设有 `basePath: '/project-brush'`；vinext beta.5 的 basePath 与 `output: 'export'` 不能同用，故由 `web/scripts/prerender.mjs` 启动构建产物 worker 冻结 SSR HTML（`npm run prerender`），public 资源一并复制进产物目录。
+
 ## 实现
 
 React 19 + TypeScript + Vinext/Vite，交互控件基于 Base UI / Shadcn。采用 Canvas 2D 绘制细线与文字，无需 WebGPU。浏览器负责画布合成。
